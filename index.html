@@ -1241,8 +1241,25 @@
     <div class="section-label reveal">Selected Projects</div>
     <div class="work-grid">
       <div class="work-card reveal">
-        <div class="work-card-visual">
-          <div class="work-card-bg">
+        <div class="work-card-visual" style="overflow:hidden; position:relative;">
+          <iframe
+            id="iframe-campusgo"
+            src="https://campus-go-yqxw.vercel.app/"
+            style="
+              width: 1280px;
+              height: 960px;
+              border: none;
+              transform: scale(0.28);
+              transform-origin: top left;
+              pointer-events: none;
+              position: absolute;
+              top: 0;
+              left: 0;
+            "
+            loading="lazy"
+            title="CampusGO Preview"
+          ></iframe>
+          <div id="fallback-campusgo" class="work-card-bg" style="display:none; background: linear-gradient(135deg, #1a1a2e, #16213e); width:100%; height:100%; align-items:center; justify-content:center;">
             <span class="work-card-game-title">CAMPUSGO</span>
             <div class="work-card-mockup">
               <div class="mockup-bar">
@@ -1281,6 +1298,72 @@
           <div class="metric-item">
             <h4>QR</h4>
             <p>Ticketing</p>
+          </div>
+          <div class="metric-item">
+            <h4>Prod</h4>
+            <p>Deployed</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card reveal">
+        <div class="work-card-visual" style="overflow:hidden; position:relative;">
+          <iframe
+            id="iframe-archive"
+            src="https://archivecloset.netlify.app"
+            style="
+              width: 1280px;
+              height: 960px;
+              border: none;
+              transform: scale(0.28);
+              transform-origin: top left;
+              pointer-events: none;
+              position: absolute;
+              top: 0;
+              left: 0;
+            "
+            loading="lazy"
+            title="Archive Closet Preview"
+          ></iframe>
+          <div id="fallback-archive" class="work-card-bg" style="display:none; background: linear-gradient(135deg, #2d1a0e, #1a0f07); width:100%; height:100%; align-items:center; justify-content:center;">
+            <span class="work-card-game-title">ARCHIVE</span>
+            <div class="work-card-mockup">
+              <div class="mockup-bar">
+                <span class="mockup-dot"></span>
+                <span class="mockup-dot"></span>
+                <span class="mockup-dot"></span>
+              </div>
+              <div class="mockup-content">
+                <div class="mockup-line" style="width:50%"></div>
+                <div class="mockup-line" style="width:70%"></div>
+                <div class="mockup-block"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="work-card-info">
+          <div>
+            <div class="work-card-title">Archive Closet</div>
+            <div class="work-card-desc">Vintage e-commerce store — product drops, WhatsApp ordering, admin dashboard, Supabase backend</div>
+            <div class="work-card-kicker">Deployed on Netlify · Zimbabwe-based</div>
+          </div>
+          <div class="work-card-actions">
+            <a class="work-action-btn" href="https://archivecloset.netlify.app" target="_blank" rel="noopener noreferrer">Live Site</a>
+            <a class="work-action-btn" href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+        <div class="work-card-metrics">
+          <div class="metric-item">
+            <h4>8</h4>
+            <p>Pages</p>
+          </div>
+          <div class="metric-item">
+            <h4>Live</h4>
+            <p>Drop System</p>
+          </div>
+          <div class="metric-item">
+            <h4>WA</h4>
+            <p>Ordering</p>
           </div>
           <div class="metric-item">
             <h4>Prod</h4>
@@ -1584,6 +1667,28 @@ Keep answers under 3 sentences unless more detail is needed.`;
         setCyclingTitle(titles[titleIdx]);
       }, 2200);
     }
+
+    // iframe fallback — show graphic if site blocks embedding
+    ['campusgo', 'archive'].forEach(id => {
+      const iframe = document.getElementById(`iframe-${id}`);
+      const fallback = document.getElementById(`fallback-${id}`);
+      if (!iframe || !fallback) return;
+      const timer = setTimeout(() => {
+        fallback.style.display = 'flex';
+        iframe.style.display = 'none';
+      }, 5000);
+      iframe.addEventListener('load', () => {
+        try {
+          const doc = iframe.contentDocument || iframe.contentWindow.document;
+          if (!doc || !doc.body) throw new Error('blocked');
+          clearTimeout(timer);
+        } catch(e) {
+          clearTimeout(timer);
+          fallback.style.display = 'flex';
+          iframe.style.display = 'none';
+        }
+      });
+    });
   </script>
 </body>
 </html>
