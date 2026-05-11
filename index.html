@@ -508,6 +508,14 @@
       overflow: hidden;
     }
 
+    .work-card-visual img {
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .work-card:hover .work-card-visual img {
+      transform: scale(1.05);
+    }
+
     .work-card-bg {
       width: 100%;
       height: 100%;
@@ -1242,38 +1250,12 @@
     <div class="work-grid">
       <div class="work-card reveal">
         <div class="work-card-visual" style="overflow:hidden; position:relative;">
-          <iframe
-            id="iframe-campusgo"
-            src="https://campus-go-yqxw.vercel.app/"
-            style="
-              width: 1280px;
-              height: 960px;
-              border: none;
-              transform: scale(0.28);
-              transform-origin: top left;
-              pointer-events: none;
-              position: absolute;
-              top: 0;
-              left: 0;
-            "
+          <img
+            src="./campus-go-preveiw.png"
+            alt="CampusGO Preview"
+            style="width:100%; height:100%; object-fit:cover; object-position:top;"
             loading="lazy"
-            title="CampusGO Preview"
-          ></iframe>
-          <div id="fallback-campusgo" class="work-card-bg" style="display:none; background: linear-gradient(135deg, #1a1a2e, #16213e); width:100%; height:100%; align-items:center; justify-content:center;">
-            <span class="work-card-game-title">CAMPUSGO</span>
-            <div class="work-card-mockup">
-              <div class="mockup-bar">
-                <span class="mockup-dot"></span>
-                <span class="mockup-dot"></span>
-                <span class="mockup-dot"></span>
-              </div>
-              <div class="mockup-content">
-                <div class="mockup-line" style="width:60%"></div>
-                <div class="mockup-line" style="width:40%"></div>
-                <div class="mockup-block"></div>
-              </div>
-            </div>
-          </div>
+          />
         </div>
         <div class="work-card-info">
           <div>
@@ -1308,38 +1290,12 @@
 
       <div class="work-card reveal">
         <div class="work-card-visual" style="overflow:hidden; position:relative;">
-          <iframe
-            id="iframe-archive"
-            src="https://archivecloset.netlify.app"
-            style="
-              width: 1280px;
-              height: 960px;
-              border: none;
-              transform: scale(0.28);
-              transform-origin: top left;
-              pointer-events: none;
-              position: absolute;
-              top: 0;
-              left: 0;
-            "
+          <img
+            src="./archive-closet-preview.png"
+            alt="Archive Closet Preview"
+            style="width:100%; height:100%; object-fit:cover; object-position:top;"
             loading="lazy"
-            title="Archive Closet Preview"
-          ></iframe>
-          <div id="fallback-archive" class="work-card-bg" style="display:none; background: linear-gradient(135deg, #2d1a0e, #1a0f07); width:100%; height:100%; align-items:center; justify-content:center;">
-            <span class="work-card-game-title">ARCHIVE</span>
-            <div class="work-card-mockup">
-              <div class="mockup-bar">
-                <span class="mockup-dot"></span>
-                <span class="mockup-dot"></span>
-                <span class="mockup-dot"></span>
-              </div>
-              <div class="mockup-content">
-                <div class="mockup-line" style="width:50%"></div>
-                <div class="mockup-line" style="width:70%"></div>
-                <div class="mockup-block"></div>
-              </div>
-            </div>
-          </div>
+          />
         </div>
         <div class="work-card-info">
           <div>
