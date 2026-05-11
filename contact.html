@@ -19,7 +19,7 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg);
+      background: var(--bg-dark);
       color: var(--text);
       min-height: 100vh;
       cursor: default;
@@ -41,6 +41,11 @@
     .cursor.hover {
       transform: scale(3);
       background: rgba(255,255,255,0.15);
+    }
+
+    @media (pointer: coarse) {
+      .cursor { display: none; }
+      body { cursor: auto; }
     }
 
     nav {

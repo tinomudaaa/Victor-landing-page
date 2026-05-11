@@ -51,6 +51,11 @@
       background: rgba(255,255,255,0.15);
     }
 
+    @media (pointer: coarse) {
+      .cursor { display: none; }
+      body { cursor: auto; }
+    }
+
     /* Navigation */
     nav {
       position: fixed;
@@ -73,6 +78,7 @@
       color: var(--text-white);
       opacity: 0.98;
       text-shadow: 0 1px 8px rgba(0,0,0,0.22);
+      text-decoration: none;
     }
 
     .nav-links {
@@ -1153,7 +1159,7 @@
   <div class="cursor" id="cursor"></div>
 
   <nav>
-    <div class="nav-logo">© Victor</div>
+    <a href="./index.html" class="nav-logo">© Victor</a>
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
       <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -1341,14 +1347,14 @@
     <div class="section-label reveal">Get in Touch</div>
     <h2 class="contact-heading reveal">Let's build<br>something.</h2>
     <p class="contact-sub reveal">Have a project or idea? I'd love to hear from you.</p>
-    <a href="./contact.html" class="contact-btn reveal">Get in Touch →</a>
+    <a href="./contact.html" class="contact-btn reveal">Start a Project →</a>
   </section>
 
   <footer>
     <span>© 2026 Victor Saurombe. Built from Victoria Falls, Zimbabwe.</span>
     <div class="footer-links">
-      <a href="https://github.com/" target="_blank">GitHub</a>
-      <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/tinomudaaa" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/victor-saurombe-b01b57343" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
   </footer>
 
@@ -1495,7 +1501,6 @@ Keep answers under 3 sentences unless more detail is needed.`;
       chatInput.value = '';
       chatSend.disabled = true;
       chatWidget.classList.add('active');
-      chatChips.style.display = 'none';
       appendMsg('user', text);
       chatHistory.push({ role: 'user', content: text });
       showTyping();
@@ -1530,6 +1535,11 @@ Keep answers under 3 sentences unless more detail is needed.`;
     }
 
     chatSend.addEventListener('click', () => sendMessage(chatInput.value));
+    chatInput.addEventListener('input', () => {
+      if (!chatInput.value.trim()) chatChips.style.display = 'flex';
+      else chatChips.style.display = 'none';
+    });
+
     chatInput.addEventListener('keydown', e => {
       if (e.key === 'Enter') sendMessage(chatInput.value);
     });
