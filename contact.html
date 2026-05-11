@@ -122,7 +122,7 @@
     main {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 120px 24px 80px;
+      padding: 140px 48px 80px;
     }
 
     .heading-wrap {
@@ -184,7 +184,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 22px;
       align-items: start;
-      margin-top: 30px;
+      margin-top: 48px;
     }
 
     .left-col { display: flex; flex-direction: column; gap: 12px; }
@@ -194,6 +194,14 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       backdrop-filter: blur(6px);
+    }
+
+    .form-card {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12);
     }
 
     .info-card {
@@ -247,7 +255,7 @@
 
     .form-card h2 {
       font-family: 'Syne', sans-serif;
-      font-size: 30px;
+      font-size: clamp(24px, 3vw, 36px);
       margin-bottom: 6px;
       letter-spacing: -0.02em;
     }
@@ -257,7 +265,7 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      margin-bottom: 18px;
+      margin-bottom: 24px;
     }
 
     .form-row {
@@ -375,6 +383,12 @@
       transform: none;
     }
   </style>
+  <meta property="og:title" content="Contact — Victor Saurombe">
+  <meta property="og:description" content="Let's build something together. Full-Stack Developer based in Victoria Falls, Zimbabwe.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact — Victor Saurombe">
+  <meta name="twitter:description" content="Let's build something together. Full-Stack Developer based in Victoria Falls, Zimbabwe.">
 </head>
 <body>
   <div class="cursor" id="cursor"></div>
@@ -405,7 +419,7 @@
       <div class="left-col">
         <article class="info-card">
           <span class="icon-badge">
-            <svg viewBox="0 0 24 24"><path d="M12 21s6-5.5 6-11a6 6 0 1 0-12 0c0 5.5 6 11 6 11z"/><circle cx="12" cy="10" r="2.2"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s6-5.5 6-11a6 6 0 1 0-12 0c0 5.5 6 11 6 11z"/><circle cx="12" cy="10" r="2.2"/></svg>
           </span>
           <div>
             <h3>Location</h3>
@@ -414,7 +428,7 @@
         </article>
         <article class="info-card">
           <span class="icon-badge">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v5l3 2"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v5l3 2"/></svg>
           </span>
           <div>
             <h3>Availability</h3>
@@ -423,7 +437,7 @@
         </article>
         <article class="info-card">
           <span class="icon-badge">
-            <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg>
           </span>
           <div>
             <h3>Socials</h3>
@@ -466,6 +480,24 @@
     </section>
   </main>
 
+  <footer style="
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    flex-wrap: wrap;
+    gap: 12px;
+  ">
+    <span>© 2026 Victor Saurombe. Built from Victoria Falls, Zimbabwe.</span>
+    <div style="display:flex; gap:20px;">
+      <a href="https://github.com/tinomudaaa" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.45); text-decoration:none; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">GitHub</a>
+      <a href="https://www.linkedin.com/in/victor-saurombe-b01b57343" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.45); text-decoration:none; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">LinkedIn</a>
+    </div>
+  </footer>
+
   <script>
     const cursor = document.getElementById('cursor');
     let mx = 0, my = 0, cx = 0, cy = 0;
@@ -481,7 +513,7 @@
       requestAnimationFrame(animateCursor);
     }
     animateCursor();
-    const hoverables = document.querySelectorAll('a, button, input, textarea, .contact-tab, .info-card, .nav-toggle');
+    const hoverables = document.querySelectorAll('a, button, input, textarea, .contact-tab, .info-card, .nav-toggle, .submit-btn');
     hoverables.forEach((el) => {
       el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
