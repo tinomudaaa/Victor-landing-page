@@ -141,7 +141,7 @@
 
     .heading-wrap h1 {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(44px, 6vw, 72px);
+      font-size: clamp(48px, 7vw, 100px);
       letter-spacing: -0.04em;
       line-height: 0.95;
       text-shadow: 0 2px 14px rgba(0,0,0,0.18);
@@ -192,7 +192,7 @@
     .info-card, .form-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 16px;
       backdrop-filter: blur(6px);
     }
 
@@ -302,21 +302,24 @@
 
     .submit-btn {
       width: 100%;
-      margin-top: 6px;
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 10px;
-      padding: 10px 14px;
-      background: rgba(255,255,255,0.86);
-      color: #111;
-      font-size: 11px;
+      margin-top: 10px;
+      padding: 14px 28px;
+      background: var(--text, #f2f2f2);
+      color: #1a1a1a;
+      border: none;
+      border-radius: 40px;
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
       font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      letter-spacing: 0.01em;
       cursor: pointer;
-      transition: transform 0.18s ease, opacity 0.18s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .submit-btn:hover { transform: translateY(-1px); }
+    .submit-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+    }
     .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
     .form-status {
@@ -362,6 +365,15 @@
       main { padding-top: 34px; }
       .heading-wrap h1 { line-height: 1.02; }
     }
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
   </style>
 </head>
 <body>
@@ -380,16 +392,16 @@
 
   <main>
     <section class="heading-wrap">
-      <div class="section-label">Let's Connect</div>
-      <h1>Let's Build<br>Something.</h1>
-      <p>Have a project in mind? Let's turn it into a real system that solves problems and creates value.</p>
-      <div class="contact-tabs">
+      <div class="section-label reveal">Let's Connect</div>
+      <h1 class="reveal">Let's Build<br>Something.</h1>
+      <p class="reveal">Have a project in mind? Let's turn it into a real system that solves problems and creates value.</p>
+      <div class="contact-tabs reveal">
         <a class="contact-tab" href="mailto:jnrsaurombe@outlook.com">Email Me</a>
         <a class="contact-tab" href="https://www.linkedin.com/in/victor-saurombe-b01b57343" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
     </section>
 
-    <section class="contact-grid">
+    <section class="contact-grid reveal">
       <div class="left-col">
         <article class="info-card">
           <span class="icon-badge">
@@ -539,6 +551,17 @@
         submitBtn.textContent = 'Send Message';
       }
     });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => revealObserver.observe(el));
   </script>
 </body>
 </html>
