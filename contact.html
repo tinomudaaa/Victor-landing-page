@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Victor Saurombe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #5E5A56;
+      --bg-dark: #2A2A2A;
+      --card: rgba(42, 42, 42, 0.9);
+      --border: rgba(255, 255, 255, 0.12);
+      --text: #f2f2f2;
+      --muted: rgba(255, 255, 255, 0.58);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      cursor: default;
+      overflow-x: hidden;
+    }
+
+    .cursor {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.8);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 10000;
+      transition: transform 0.15s ease, background 0.15s ease;
+      mix-blend-mode: difference;
+    }
+
+    .cursor.hover {
+      transform: scale(3);
+      background: rgba(255,255,255,0.15);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      z-index: 10;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 48px;
+      backdrop-filter: none;
+      background: transparent;
+      mix-blend-mode: normal;
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      text-decoration: none;
+      opacity: 0.98;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.22);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(42,42,42,0.5);
+      color: var(--text);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+    }
+
+    .nav-toggle svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      opacity: 0.95;
+      letter-spacing: 0.01em;
+      transition: opacity 0.3s ease;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.22);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      opacity: 1;
+      background: transparent;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 120px 24px 80px;
+    }
+
+    .heading-wrap {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 22px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.55;
+      margin-bottom: 12px;
+    }
+
+    .heading-wrap h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(44px, 6vw, 72px);
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.18);
+    }
+
+    .heading-wrap p {
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .contact-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    .contact-tab {
+      font-size: 12px;
+      padding: 8px 16px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 24px;
+      opacity: 0.75;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.25s ease;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .contact-tab:hover {
+      opacity: 1;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: start;
+      margin-top: 30px;
+    }
+
+    .left-col { display: flex; flex-direction: column; gap: 12px; }
+
+    .info-card, .form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      backdrop-filter: blur(6px);
+    }
+
+    .info-card {
+      padding: 16px 18px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .icon-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .icon-badge svg {
+      width: 14px;
+      height: 14px;
+      stroke: rgba(255,255,255,0.86);
+      stroke-width: 1.8;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .info-card h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .info-card p,
+    .info-card p a {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .info-card p a:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+
+    .form-card { padding: 20px; }
+
+    .form-card h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 30px;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .form-card .sub {
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 18px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .input-group { margin-bottom: 10px; }
+
+    .input-group label {
+      display: block;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+      color: rgba(255,255,255,0.55);
+    }
+
+    input, textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 10px 11px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: rgba(255,255,255,0.4);
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
+    }
+
+    textarea {
+      min-height: 112px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 6px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 10px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.86);
+      color: #111;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .submit-btn:hover { transform: translateY(-1px); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .form-status {
+      margin-top: 10px;
+      min-height: 18px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .form-status.success { color: #9ed8a8; }
+    .form-status.error { color: #e7a2a2; }
+
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-toggle {
+        display: inline-flex;
+      }
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 24px;
+        min-width: 160px;
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px;
+        background: rgba(42,42,42,0.92);
+        border: 1px solid rgba(255,255,255,0.14);
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+      }
+      nav.nav-open .nav-links {
+        display: flex;
+      }
+      .nav-links a {
+        opacity: 0.98;
+      }
+      main { padding-top: 34px; }
+      .heading-wrap h1 { line-height: 1.02; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <nav>
+    <a class="nav-logo" href="./index.html">© Victor</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="./index.html#work">Projects</a></li>
+      <li><a href="./index.html#about">About</a></li>
+      <li><a class="active" href="./contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="heading-wrap">
+      <div class="section-label">Let's Connect</div>
+      <h1>Let's Build<br>Something.</h1>
+      <p>Have a project in mind? Let's turn it into a real system that solves problems and creates value.</p>
+      <div class="contact-tabs">
+        <a class="contact-tab" href="mailto:jnrsaurombe@outlook.com">Email Me</a>
+        <a class="contact-tab" href="https://www.linkedin.com/in/victor-saurombe-b01b57343" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </section>
+
+    <section class="contact-grid">
+      <div class="left-col">
+        <article class="info-card">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24"><path d="M12 21s6-5.5 6-11a6 6 0 1 0-12 0c0 5.5 6 11 6 11z"/><circle cx="12" cy="10" r="2.2"/></svg>
+          </span>
+          <div>
+            <h3>Location</h3>
+            <p>Based in Victoria Falls, Zimbabwe. Available for remote collaboration worldwide.</p>
+          </div>
+        </article>
+        <article class="info-card">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v5l3 2"/></svg>
+          </span>
+          <div>
+            <h3>Availability</h3>
+            <p>Open to new projects and partnerships. Typical response time is within 24 hours.</p>
+          </div>
+        </article>
+        <article class="info-card">
+          <span class="icon-badge">
+            <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg>
+          </span>
+          <div>
+            <h3>Socials</h3>
+            <p>
+              <a href="https://github.com/tinomudaaa" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+              <a href="https://www.linkedin.com/in/victor-saurombe-b01b57343" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <article class="form-card">
+        <h2>Send a Message</h2>
+        <p class="sub">Tell me about your project</p>
+
+        <form id="contact-form">
+          <div class="form-row">
+            <div class="input-group">
+              <label for="name">Your Name</label>
+              <input id="name" name="name" type="text" required>
+            </div>
+            <div class="input-group">
+              <label for="email">Email Address</label>
+              <input id="email" name="email" type="email" required>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="subject">Subject</label>
+            <input id="subject" name="subject" type="text" required>
+          </div>
+          <div class="input-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <button id="submit-btn" class="submit-btn" type="submit">Send Message</button>
+          <div id="form-status" class="form-status" aria-live="polite"></div>
+        </form>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    let mx = 0, my = 0, cx = 0, cy = 0;
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+    });
+    function animateCursor() {
+      cx += (mx - cx) * 0.15;
+      cy += (my - cy) * 0.15;
+      cursor.style.left = cx - 8 + 'px';
+      cursor.style.top = cy - 8 + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+    const hoverables = document.querySelectorAll('a, button, input, textarea, .contact-tab, .info-card, .nav-toggle');
+    hoverables.forEach((el) => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    const nav = document.querySelector('nav');
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinkItems = document.querySelectorAll('.nav-links a');
+    if (nav && navToggle) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('nav-open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+      navLinkItems.forEach((link) => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('nav-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+          nav.classList.remove('nav-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const formStatus = document.getElementById('form-status');
+    const contactApiUrl = `${window.location.protocol}//${window.location.hostname}:3000/api/contact`;
+
+    contactForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      formStatus.textContent = '';
+      formStatus.className = 'form-status';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      const payload = {
+        name: contactForm.name.value.trim(),
+        email: contactForm.email.value.trim(),
+        subject: contactForm.subject.value.trim(),
+        message: contactForm.message.value.trim()
+      };
+
+      try {
+        const response = await fetch(contactApiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to send message.');
+        }
+
+        formStatus.textContent = data.message || 'Message sent successfully.';
+        formStatus.classList.add('success');
+        contactForm.reset();
+      } catch (error) {
+        formStatus.textContent = error.message || 'Failed to send message.';
+        formStatus.classList.add('error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+      }
+    });
+  </script>
+</body>
+</html>

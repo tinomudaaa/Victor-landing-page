@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Victor Test",
+    "email": "victor.test@example.com",
+    "subject": "Test Subject",
+    "message": "This is a longer test message for endpoint validation.",
+    "createdAt": "2026-04-27T05:23:35.918Z"
+  },
+  {
+    "name": "Jake",
+    "email": "victorsaurombe@gmail.com",
+    "subject": "Campus",
+    "message": "I need to know if you can with my project",
+    "createdAt": "2026-04-27T07:38:57.865Z"
+  }
+]
