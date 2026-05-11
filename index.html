@@ -68,6 +68,7 @@
       justify-content: space-between;
       align-items: center;
       mix-blend-mode: normal;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.28) 0%, transparent 100%);
     }
 
     .nav-logo {
@@ -79,6 +80,11 @@
       opacity: 0.98;
       text-shadow: 0 1px 8px rgba(0,0,0,0.22);
       text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .nav-logo:hover {
+      opacity: 0.75;
     }
 
     .nav-links {
@@ -121,6 +127,12 @@
       transition: opacity 0.3s ease;
       letter-spacing: 0.01em;
       text-shadow: 0 1px 8px rgba(0,0,0,0.22);
+    }
+
+    .nav-links a.active {
+      opacity: 1;
+      border-bottom: 1px solid rgba(255,255,255,0.4);
+      padding-bottom: 2px;
     }
 
     .nav-links a:hover {
@@ -441,6 +453,12 @@
     /* Sections shared */
     section {
       padding: 120px 48px;
+    }
+
+    #work,
+    #about,
+    #contact {
+      scroll-margin-top: 80px;
     }
 
     .section-label {
